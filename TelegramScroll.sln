@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2036
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TelegramScroll", "TelegramScroll\TelegramScroll.csproj", "{D28C4982-1088-4880-88CA-D52EA92A40DE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
+		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D28C4982-1088-4880-88CA-D52EA92A40DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D28C4982-1088-4880-88CA-D52EA92A40DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D28C4982-1088-4880-88CA-D52EA92A40DE}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{D28C4982-1088-4880-88CA-D52EA92A40DE}.Debug|x64.Build.0 = Debug|Any CPU
+		{D28C4982-1088-4880-88CA-D52EA92A40DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D28C4982-1088-4880-88CA-D52EA92A40DE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D28C4982-1088-4880-88CA-D52EA92A40DE}.Release|x64.ActiveCfg = Release|Any CPU
+		{D28C4982-1088-4880-88CA-D52EA92A40DE}.Release|x64.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7E588F7D-3F80-4741-A15F-E2AA5BCD7390}
+	EndGlobalSection
+EndGlobal
