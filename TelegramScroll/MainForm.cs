@@ -26,6 +26,8 @@ namespace TelegramScroll
                 _processSharp = new ProcessSharp(telegramProcess, MemoryType.Local);
                 _processSharp.Memory = new ExternalProcessMemory(_processSharp.Handle);
                 var scanner = new PatternScanner(_processSharp.ModuleFactory.MainModule);
+                // function 164be10 takes new msg count as parameter, which is compared to current unread msg count,
+                // then overwrites it; in-between, it's compared against 1; nop the jnz after the cmp to keep scrolling
                 var pattern = new DwordPattern("8B 40 04 89 4D E0 89 45 E8");
                 var scanResult = scanner.Find(pattern);
                 if (!scanResult.Found) throw new Exception("something broke");
