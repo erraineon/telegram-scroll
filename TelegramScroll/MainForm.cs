@@ -26,7 +26,7 @@ namespace TelegramScroll
                 _processSharp = new ProcessSharp(telegramProcess, MemoryType.Local);
                 _processSharp.Memory = new ExternalProcessMemory(_processSharp.Handle);
                 var scanner = new PatternScanner(_processSharp.ModuleFactory.MainModule);
-                var pattern = new DwordPattern("EB 02 33 DB 83 BF FC 00 00 00 00");
+                var pattern = new DwordPattern("8B 40 04 89 4D E0 89 45 E8");
                 var scanResult = scanner.Find(pattern);
                 if (!scanResult.Found) throw new Exception("something broke");
                 _address = scanResult.ReadAddress + pattern.GetBytes().Count;
@@ -42,13 +42,13 @@ namespace TelegramScroll
             if (checkBox.Checked)
             {
                 // xor eax, eax; nop
-                _processSharp.Memory.Write(_address, new byte[] {0x33, 0xC0, 0x90});
+                _processSharp.Memory.Write(_address, new byte[] {0x90, 0x90});
                 checkBox.Text = "disable";
             }
             else
             {
                 // mov eax, dword [ebp+8]
-                _processSharp.Memory.Write(_address, new byte[] {0x8b, 0x45, 0x08});
+                _processSharp.Memory.Write(_address, new byte[] {0x75, 0x79});
                 checkBox.Text = "enable";
             }
         }
