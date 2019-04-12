@@ -43,13 +43,13 @@ namespace TelegramScroll
         {
             if (checkBox.Checked)
             {
-                // xor eax, eax; nop
+                // nop; nop
                 _processSharp.Memory.Write(_address, new byte[] {0x90, 0x90});
                 checkBox.Text = "disable";
             }
             else
             {
-                // mov eax, dword [ebp+8]
+                // jnz 164bf23
                 _processSharp.Memory.Write(_address, new byte[] {0x75, 0x79});
                 checkBox.Text = "enable";
             }
