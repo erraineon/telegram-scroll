@@ -26,12 +26,11 @@ namespace TelegramScroll
                 _processSharp = new ProcessSharp(telegramProcess, MemoryType.Local);
                 _processSharp.Memory = new ExternalProcessMemory(_processSharp.Handle);
                 var scanner = new PatternScanner(_processSharp.ModuleFactory.MainModule);
-                // function 013A5A40 takes new msg count as parameter, which is compared to current unread msg count,
-                // then overwrites it; in-between, it's compared against 1; nop the jnz after the cmp to keep scrolling
-                var pattern = new DwordPattern("?? ?? 8A 9F 0D 01 00 00");
+                // why do they keep changing this specific function
+                var pattern = new DwordPattern("EB 41 85 FF 75 1B");
                 var scanResult = scanner.Find(pattern);
                 if (!scanResult.Found) throw new Exception("something broke");
-                _address = scanResult.ReadAddress;
+                _address = scanResult.ReadAddress + 2;
             }
             catch (Exception exception)
             {
@@ -43,14 +42,14 @@ namespace TelegramScroll
         {
             if (checkBox.Checked)
             {
-                // nop; nop
-                _processSharp.Memory.Write(_address, new byte[] {0x90, 0x90});
+                // xor edi, edi; nop; nop
+                _processSharp.Memory.Write(_address, new byte[] {0x33, 0xff, 0x90, 0x90});
                 checkBox.Text = "disable";
             }
             else
             {
-                // jnz 164bf23
-                _processSharp.Memory.Write(_address, new byte[] {0x75, 0x79});
+                // test edi, edi; jnz 0110fff7
+                _processSharp.Memory.Write(_address, new byte[] {0x85, 0xff, 0x75, 0x1b });
                 checkBox.Text = "enable";
             }
         }
