@@ -27,7 +27,7 @@ namespace TelegramScroll
                 _processSharp.Memory = new ExternalProcessMemory(_processSharp.Handle);
                 var scanner = new PatternScanner(_processSharp.ModuleFactory.MainModule);
                 // why do they keep changing this specific function
-                var pattern = new DwordPattern("EB 7E 85 DB 75 58");
+                var pattern = new DwordPattern("85 F6 74 48 8B CB");
                 var scanResult = scanner.Find(pattern);
                 if (!scanResult.Found) throw new Exception("something broke");
                 _address = scanResult.ReadAddress + 2;
@@ -42,14 +42,14 @@ namespace TelegramScroll
         {
             if (checkBox.Checked)
             {
-                // xor edi, edi; nop; nop
-                _processSharp.Memory.Write(_address, new byte[] {0x31, 0xdb, 0x90, 0x90});
+                // jmp short
+                _processSharp.Memory.Write(_address, new byte[] {0xeb});
                 checkBox.Text = "disable";
             }
             else
             {
-                // test edi, edi; jnz 0078bfa5
-                _processSharp.Memory.Write(_address, new byte[] {0x85, 0xdb, 0x75, 0x58});
+                // je short
+                _processSharp.Memory.Write(_address, new byte[] {0x74});
                 checkBox.Text = "enable";
             }
         }
